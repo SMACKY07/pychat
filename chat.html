@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>StudyMate Chatbot</title>
+    <link rel="stylesheet" href="../static/main.css">
+    <style>
+        .chat-container {
+            background-color: #f2f2f2;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            padding: 10px;
+            margin-bottom: 10px;
+            overflow-y: auto;
+            max-height: 300px;
+        }
+        .user-message {
+            text-align: right;
+            color: #4CAF50;
+        }
+        .bot-message {
+            text-align: left;
+            color: #1E90FF;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1 style="color: white; text-align: center; padding-top: 50px; font-size: 37px;">StudyMate Chatbot</h1>
+        <div class="chat-container" id="chat-container">
+            <div class="bot-message">Welcome! How can I assist you today?</div>
+        </div>
+        <div style="padding-top: 350px; width: 200px; display: inline-flex;">
+            <img src="../static/gif3.gif" alt="" >
+        </div>
+        <div class="btn" style="display: inline-flex; float: right; padding-top: 60vh; padding-right: 50px;">
+            <input type="text" id="user-input" style="width: 200px; height: 30px;" placeholder="Type your message...">
+            <button onclick="sendMessage()" style="height: 35px;">Send</button>
+            <button class="right" style="width: 50px; height: 35px;" onclick="exitChat()">Exit</button>
+        </div>
+    </div>
+
+    <script>
+        function sendMessage() {
+            var userInput = document.getElementById('user-input').value;
+            if (userInput.trim() === '') return;
+
+            appendMessage('user', userInput);
+            // Here you can add logic to handle the user input and generate bot responses
+            generateBotResponse(userInput);
+
+            // Clear input field
+            document.getElementById('user-input').value = '';
+        }
+
+        function generateBotResponse(userInput) {
+            // Example simple bot response logic
+            var botResponse = "I'm just a demo bot. I don't understand much!";
+            appendMessage('bot', botResponse);
+        }
+
+        function appendMessage(sender, message) {
+            var chatContainer = document.getElementById('chat-container');
+            var messageElement = document.createElement('div');
+            messageElement.classList.add(sender + '-message');
+            messageElement.innerHTML = message;
+            chatContainer.appendChild(messageElement);
+
+            // Automatically scroll to the bottom of chat container
+            chatContainer.scrollTop = chatContainer.scrollHeight;
+        }
+
+        function exitChat() {
+            // Implement functionality to exit the chat (optional)
+            alert('Exiting chat...');
+        }
+    </script>
+</body>
+</html>
